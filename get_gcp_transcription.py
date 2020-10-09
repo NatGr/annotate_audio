@@ -12,13 +12,11 @@ if __name__ == "__main__":
     parser.add_argument("--language_code", help="speaker language code", required=True)  # en-US or fr-FR for example
     parser.add_argument(
         "--csv", help="name of the csv file that is to be filled with the files transcript transcript", required=True)
-    parser.add_argument("--sample_rate", help="audio sample rate", default=16000, type=int)
     args = parser.parse_args()
 
     files = pd.read_csv(args.csv, sep=";", dtype="string")
     config = {
         "language_code": args.language_code,
-        "sample_rate_hertz": args.sample_rate,
         "use_enhanced": True,
         "enable_automatic_punctuation": True,
     }
