@@ -24,7 +24,7 @@ class PlayAudioSample(threading.Thread):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("""manually completes the transcriptions of audio files""")
     parser.add_argument("--audio_folder", help="folder that contains the audio files", required=True)
-    parser.add_argument("--csv", help="name of the csv file that is to be filled with the files transcript transcript", required=True)
+    parser.add_argument("--csv", help="name of the csv file that is to be filled with the files transcriptions", required=True)
     parser.add_argument("--start_offset", help="offset of the first file to consider", default=0, type=int)
     args = parser.parse_args()
     
@@ -49,22 +49,22 @@ if __name__ == "__main__":
     
     def prepare_next_turn():
         """loads next file or ends the program"""
-        global current_offset
+        global current_offset, audio_player
         current_offset += 1
         progress_bar["value"] = current_offset
         if current_offset < len(files):
-            transcription.delete(0, END)
+            transcription.delete("1.0", END)
             sent = files.sentence.iat[current_offset]
             if isinstance(sent, str) and sent != "":
-                transcription.insert(0, sent)
-            PlayAudioSample(os.path.join(args.audio_folder, files.file.iat[current_offset])).start()
+                transcription.insert("1.0", sent)
+            audio_player = PlayAudioSample(os.path.join(args.audio_folder, files.file.iat[current_offset])).start()
             transcription.focus()
         else:
             window.destroy()
     
     def press_next():
         """modifies csv with text content and prepares for next turn"""
-        files.iat[current_offset, 1] = transcription.get()
+        files.iat[current_offset, 1] = transcription.get("1.0", END).replace("\n", "")
         logging.info(f"{current_offset} - {files.iat[current_offset, 1]}")
         prepare_next_turn()
         

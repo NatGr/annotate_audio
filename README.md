@@ -1,6 +1,6 @@
 # Annotate audio
 These python helper scripts help you to get smaller annotated audio files, from a large audio containing file, to train STT or TTS models, by:
-    1. split the large file in several smaller wav files, separated by silence
+    1. split the large file in several smaller wav files, separated by silence. If there are several speaker in your audio, you can also remove the parts spoken by the other(s) speaker(s).
     2. (optional) get transcription for these smaller audio files from google cloud STT service, this requires a GCP account
     3. manually annotate (or correct GCP annotations) the smaller audio files
     
@@ -23,11 +23,11 @@ and configure a project [as shown here](https://cloud.google.com/speech-to-text/
 ```
 python split.py --input big_file.wav --audio_folder audio --out_csv sentences.csv
 ```
-sentences.csv file will be formated as "file;sentence".  
-
+sentences.csv file will be formated as "file;sentence".   
+To keep only files spoken by a particular speaker, use the "--remove_bad_segments" and "--speaker_segment" arguments.
 2.
 ```
-python get_gcp_transcription.py --audio_folder audio --csv sentences.csv --language_code fr-Fr
+python get_gcp_transcription.py --audio_folder audio --csv sentences.csv --language_code en-US
 ```
 
 3.
