@@ -34,7 +34,7 @@ if __name__ == "__main__":
     logging.basicConfig(filename=os.path.join(logdir, f'{args.csv}_{str(datetime.now()).replace(" ", "_")}.log'), level=logging.DEBUG)
 
     
-    files = pd.read_csv(args.csv, sep=";")
+    files = pd.read_csv(args.csv, sep=";", dtype = {'file': "string", 'sentence': "string"})
     offsets_deleted_sentences = []
     window = Tk()
     window.title(f"Transcription of {args.csv}")
