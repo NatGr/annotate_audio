@@ -26,6 +26,7 @@ python split.py --input big_file.wav --audio_folder audio --out_csv sentences.cs
 ```
 sentences.csv file will be formated as "file;sentence".   
 To keep only files spoken by a particular speaker, use the "--remove_bad_segments" and "--speaker_segment" arguments.  
+
 2.
 ```
 python get_gcp_transcription.py --audio_folder audio --csv sentences.csv --language_code en-US
