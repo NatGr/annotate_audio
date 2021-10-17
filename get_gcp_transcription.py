@@ -1,4 +1,4 @@
-from google.cloud import speech_v1
+from google.cloud import speech
 import io
 import argparse
 import pandas as pd
@@ -15,20 +15,19 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     files = pd.read_csv(args.csv, sep=";", dtype="string")
-    config = {
-        "language_code": args.language_code,
-        "use_enhanced": True,
-        "enable_automatic_punctuation": True,
-    }
+    config = speech.RecognitionConfig(
+        language_code=args.language_code,
+        enable_automatic_punctuation=True
+    )
         
-    client = speech_v1.SpeechClient()
+    client = speech.SpeechClient()
     
     for i in tqdm(range(len(files)), desc="files transcribed"):
         file_name = os.path.join(args.audio_folder, files.iat[i, 0])
         with io.open(file_name, "rb") as f:
             content = f.read()
-        audio = {"content": content}
-        response = client.recognize(config, audio)
+        audio = speech.RecognitionAudio(content=content)
+        response = client.recognize(config=config, audio=audio)
         transcript = ' '.join([result.alternatives[0].transcript for result in response.results])
         files.iat[i, 1] = transcript
         

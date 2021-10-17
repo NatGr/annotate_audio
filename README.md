@@ -17,6 +17,7 @@ Additionnally, if you want to use GCP's STT you should install their python clie
 pip install --upgrade google-cloud-speech
 ```
 and configure a project [as shown here](https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries?hl=fr#client-libraries-install-python).  
+The current version of this script is compatible with google-cloud-speech 2.X, if you want to use version 1.X, you can have a look at previous versions of this repo which used that version as well.
 
 ## Usage
 1.
