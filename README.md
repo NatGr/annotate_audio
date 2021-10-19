@@ -8,7 +8,7 @@ These python helper scripts help you to get smaller annotated audio files, from 
 Step 1 requires to have [ffmpeg](https://www.ffmpeg.org/download.html) installed on your system.  
 All the scripts are written in Python 3.6+, required packages can be installed with:
 ```
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 You will need [pyaudio](https://people.csail.mit.edu/hubert/pyaudio/#downloads) for step 3.  
 
@@ -16,7 +16,7 @@ Additionnally, if you want to use GCP's STT you should install their python clie
 ```
 pip install --upgrade google-cloud-speech
 ```
-and configure a project [as shown here](https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries?hl=fr#client-libraries-install-python).  
+and configure a project [as shown here](https://cloud.google.com/docs/authentication/getting-started).  
 The current version of this script is compatible with google-cloud-speech 2.X, if you want to use version 1.X, you can have a look at previous versions of this repo which used that version as well.
 
 ## Usage
